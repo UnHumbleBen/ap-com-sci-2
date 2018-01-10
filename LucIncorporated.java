@@ -3,43 +3,32 @@ import java.util.*;
 class Employee {
     private String name;
     private double salary;
-    private String dept;
-
     public Employee(String newName, double newSalary) {
         name = newName;
         salary = newSalary;
     }
-
     public String toString() {
         return "name: " + name + " salary: " + salary;
     }
 }
 class Manager extends Employee {
-    String dept;
+    private String dept = "cosmetic"; 
     public Manager(String newName, double newSalary) {
         super(newName, newSalary);
     }
-
     public String toString() {
         return super.toString() + " Department: " + dept;
     }
 }
 class Executive extends Manager {
-    String dept;
     public Executive(String newName, double newSalary) {
         super(newName, newSalary);
     }
-
-    public String toString() {
-        return super.toString();
-    }
 }
-
 public class LucIncorporated {
     public static void main(String[] args) {
         ArrayList < Employee > people = new ArrayList < Employee > ();
-        boolean cont = true;
-        while (cont == true) {
+        while (true) {
             System.out.println("Press [1] to add new employee.");
             System.out.println("Press [2] to add new manager.");
             System.out.println("Press [3] to add new executive.");
