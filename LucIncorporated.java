@@ -1,5 +1,5 @@
 import java.util.*;
-// Benjamin Lee Period 5
+// Benjamin Lee Period 5 1/9/2018
 class Employee {
     private String name;
     private double salary;
