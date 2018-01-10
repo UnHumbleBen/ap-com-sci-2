@@ -49,8 +49,8 @@ public class LucIncorporated {
             if (input == 4) {
                 for (int i = 0; i < people.size(); i++) {
                     System.out.println(people.get(i));
-
                 }
+                break;
             } else {
                 System.out.print("Enter name: ");
                 String name = in .next();
