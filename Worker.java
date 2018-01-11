@@ -10,7 +10,7 @@ public class Worker {
 
     public double computePay(int hours) {
         double pay = hours * rate;
-        if (hours > 0) pay += 1.5 * rate * (hours-40);
+        if (hours > 40) pay += 1.5 * rate * (hours-40);
         return pay;
     }
 }
@@ -29,6 +29,6 @@ class SalariedWorker extends Worker {
     }
 
     public double computePay(int hours) {
-        return computePay(40);
+        return super.computePay(40);
     }
 }
