@@ -1,9 +1,9 @@
 import java.util.*;
 // Benjamin Lee Period 5 1/9/2018
-class Employee {
+class Employee1 {
     private String name;
     private double salary;
-    public Employee(String newName, double newSalary) {
+    public Employee1(String newName, double newSalary) {
         name = newName;
         salary = newSalary;
     }
@@ -11,23 +11,23 @@ class Employee {
         return "name: " + name + " salary: " + salary;
     }
 }
-class Manager extends Employee {
+class Manager1 extends Employee1 {
     private String dept = "cosmetic"; 
-    public Manager(String newName, double newSalary) {
+    public Manager1(String newName, double newSalary) {
         super(newName, newSalary);
     }
     public String toString() {
         return super.toString() + " Department: " + dept;
     }
 }
-class Executive extends Manager {
-    public Executive(String newName, double newSalary) {
+class Executive1 extends Manager1 {
+    public Executive1(String newName, double newSalary) {
         super(newName, newSalary);
     }
 }
 public class LucIncorporated {
     public static void main(String[] args) {
-        ArrayList < Employee > people = new ArrayList < Employee > ();
+        ArrayList < Employee1 > people = new ArrayList < Employee1 > ();
         while (true) {
             System.out.println("Press [1] to add new employee.");
             System.out.println("Press [2] to add new manager.");
@@ -46,13 +46,13 @@ public class LucIncorporated {
                 System.out.print("Enter salary: ");
                 double salary = in .nextDouble();
                 if (input == 1) {
-                    Employee e = new Employee(name, salary);
+                    Employee1 e = new Employee1(name, salary);
                     people.add(e);
                 } else if (input == 2) {
-                    Manager m = new Manager(name, salary);
+                    Manager1 m = new Manager1(name, salary);
                     people.add(m);
                 } else if (input == 3) {
-                    Executive e = new Executive(name, salary);
+                    Executive1 e = new Executive1(name, salary);
                     people.add(e);
                 }
             }
