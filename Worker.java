@@ -2,7 +2,6 @@
 public class Worker {
     private String name;
     private double rate;
-
     public Worker(String newName, double newRate) {
         name = newName;
         rate = newRate;
@@ -10,7 +9,7 @@ public class Worker {
 
     public double computePay(int hours) {
         double pay = hours * rate;
-        if (hours > 40) pay += 1.5 * rate * (hours-40);
+        if (hours > 40) pay += 0.5 * rate * (hours-40);
         return pay;
     }
 }
