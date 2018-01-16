@@ -5,7 +5,6 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.Color;
-import java.awt.*;
 
 class GridComponent extends JComponent {
     public void paintComponent(Graphics g) {
