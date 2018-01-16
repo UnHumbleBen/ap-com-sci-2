@@ -18,15 +18,27 @@ g2.draw(circle);
 
 class RectangleComponent extends JComponent {
     public void paintComponent(Graphics g) {
-        final int BOX_WIDTH = 700;
-        final int BOX_HEIGHT = 600;
+        final int ROWS = 6;
+        final int COLUMNS = 7;
+        final int RADIUS = 50;
+        final int BOX_WIDTH = 2*RADIUS * COLUMNS;
+        final int BOX_HEIGHT = 2* RADIUS * ROWS;
+        
         Graphics2D g2 = (Graphics2D) g;
         Rectangle box = new Rectangle(0,0,BOX_WIDTH,BOX_HEIGHT);
         g2.setColor(Color.BLUE);
         g2.fill(box);
         g2.draw(box);
         
-        
+        Ellipse2D.Double[][] circles = new Ellipse2D.Double[ROWS][COLUMNS];
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                g2.setColor(Color.WHITE);
+                Ellipse2D.Double circle = new Ellipse2D.Double(2*j*RADIUS + RADIUS/2,2*i*RADIUS + RADIUS/2,RADIUS,RADIUS);
+                g2.fill(circle);
+                g2.draw(circle);
+            }
+        }
     }
 }
 
@@ -39,8 +51,5 @@ public class ConnectFour {
         RectangleComponent myBox = new RectangleComponent();
         frame.add(myBox);
         frame.setVisible(true);
-        //CircleComponent myCircle = new CircleComponent();
-        //frame.add(myCircle);
-        //frame.setVisible(true);
     }
 }
