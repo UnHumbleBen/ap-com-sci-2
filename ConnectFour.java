@@ -16,13 +16,13 @@ g2.draw(circle);
 }
  */
 
-class RectangleComponent extends JComponent {
+class GridComponent extends JComponent {
     public void paintComponent(Graphics g) {
         final int ROWS = 6;
         final int COLUMNS = 7;
-        final int RADIUS = 50;
-        final int BOX_WIDTH = 2*RADIUS * COLUMNS;
-        final int BOX_HEIGHT = 2* RADIUS * ROWS;
+        final int DIAMETER = 50;
+        final int BOX_WIDTH = 2*DIAMETER * COLUMNS;
+        final int BOX_HEIGHT =  2*DIAMETER * ROWS;
         
         Graphics2D g2 = (Graphics2D) g;
         Rectangle box = new Rectangle(0,0,BOX_WIDTH,BOX_HEIGHT);
@@ -34,7 +34,8 @@ class RectangleComponent extends JComponent {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
                 g2.setColor(Color.WHITE);
-                Ellipse2D.Double circle = new Ellipse2D.Double(2*j*RADIUS + RADIUS/2,2*i*RADIUS + RADIUS/2,RADIUS,RADIUS);
+                Ellipse2D.Double circle = new Ellipse2D.Double(2* j*DIAMETER + DIAMETER/2,2* i*DIAMETER + DIAMETER/2,DIAMETER,DIAMETER);
+                circles[i][j] = circle;
                 g2.fill(circle);
                 g2.draw(circle);
             }
@@ -48,7 +49,7 @@ public class ConnectFour {
         frame.setSize(1000,1000);
         frame.setTitle("Connect Four");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        RectangleComponent myBox = new RectangleComponent();
+        GridComponent myBox = new GridComponent();
         frame.add(myBox);
         frame.setVisible(true);
     }
