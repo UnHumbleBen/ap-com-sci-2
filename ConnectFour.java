@@ -30,6 +30,7 @@ class GridComponent extends JComponent {
                 g2.draw(circle);
             }
         }
+        
     }
 }
 
