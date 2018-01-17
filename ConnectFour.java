@@ -24,13 +24,12 @@ class GridComponent extends JComponent {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
                 g2.setColor(Color.WHITE);
-                Ellipse2D.Double circle = new Ellipse2D.Double(2* j*DIAMETER + DIAMETER/2,2* i*DIAMETER + DIAMETER/2,DIAMETER,DIAMETER);
+                Ellipse2D.Double circle = new Ellipse2D.Double(2*j*DIAMETER + DIAMETER/2,2*i*DIAMETER + DIAMETER/2,DIAMETER,DIAMETER);
                 circles[i][j] = circle;
                 g2.fill(circle);
                 g2.draw(circle);
             }
         }
-        
     }
 }
 
