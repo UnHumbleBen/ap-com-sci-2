@@ -35,7 +35,7 @@ class GridComponent extends JComponent {
     }
 }
 
-public class ConnectFourSaver {
+public class ConnectFourLunch {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setSize(750,650);
