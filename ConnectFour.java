@@ -5,22 +5,23 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.Color;
-
-class GridComponent extends JComponent {
+import java.awt.event.*;
+public class ConnectFour extends JComponent {
+    static Graphics g2;
+    final static int ROWS = 6;
+    final static int COLUMNS = 7;
+    final int DIAMETER = 50;
+    final int BOX_WIDTH = 2*DIAMETER * COLUMNS;
+    final int BOX_HEIGHT =  2*DIAMETER * ROWS;
+    public static Ellipse2D.Double[][] circles = new Ellipse2D.Double[ROWS][COLUMNS];
     public void paintComponent(Graphics g) {
-        final int ROWS = 6;
-        final int COLUMNS = 7;
-        final int DIAMETER = 50;
-        final int BOX_WIDTH = 2*DIAMETER * COLUMNS;
-        final int BOX_HEIGHT =  2*DIAMETER * ROWS;
-        
         Graphics2D g2 = (Graphics2D) g;
         Rectangle box = new Rectangle(0,0,BOX_WIDTH,BOX_HEIGHT);
         g2.setColor(Color.BLUE);
         g2.fill(box);
         g2.draw(box);
-        
-        Ellipse2D.Double[][] circles = new Ellipse2D.Double[ROWS][COLUMNS];
+
+        //Ellipse2D.Double[][] circles = new Ellipse2D.Double[ROWS][COLUMNS]
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
                 g2.setColor(Color.WHITE);
@@ -31,15 +32,40 @@ class GridComponent extends JComponent {
             }
         }
     }
-}
 
-public class ConnectFour {
+    public static void colorCircle(Graphics g, Ellipse2D.Double circle) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.YELLOW);
+        g2.fill(circle);
+        g2.draw(circle);
+    }
+
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setSize(750,650);
         frame.setTitle("Connect Four");
+        ConnectFour myBox = new ConnectFour();
+        class MouseClickListener implements MouseListener {
+            public void mousePressed(MouseEvent event){}
+
+            public void mouseExited(MouseEvent event){}
+
+            public void mouseEntered(MouseEvent event){}
+
+            public void mouseReleased(MouseEvent event){}
+
+            public void mouseClicked(MouseEvent event) {
+                int x = event.getX(); //returns x coordinate mouse clicked locaction
+                int y = event.getY(); //returns y coordinate
+                int row = y/100;
+                int column = x/100;
+                colorCircle(g2, circles[row][column]);
+            }
+        }
+        MouseClickListener listener = new MouseClickListener();
+        myBox.addMouseListener(listener);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GridComponent myBox = new GridComponent();
         frame.add(myBox);
         frame.setVisible(true);
     }

@@ -5,8 +5,10 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.Color;
-
+import java.awt.event.*;
 class GridComponent extends JComponent {
+    boolean isYellow = true;
+    
     public void paintComponent(Graphics g) {
         final int ROWS = 6;
         final int COLUMNS = 7;
@@ -33,13 +35,24 @@ class GridComponent extends JComponent {
     }
 }
 
-public class ConnectFour {
+public class ConnectFourSaver {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setSize(750,650);
         frame.setTitle("Connect Four");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridComponent myBox = new GridComponent();
+        class MouseClickListener implements MouseListener {
+            public void mousePressed(MouseEvent event){}
+            public void mouseExited(MouseEvent event){}
+            public void mouseEntered(MouseEvent event){}
+            public void mouseReleased(MouseEvent event){}
+            public void mouseClicked(MouseEvent event) {
+                int x = event.getX(); //returns x coordinate mouse clicked locaction
+                int y = event.getY(); //returns y coordinate
+                
+            }
+        }
         frame.add(myBox);
         frame.setVisible(true);
     }
