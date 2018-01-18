@@ -25,6 +25,19 @@ class GridComponent extends JComponent {
         Ellipse2D.Double[][] circles = new Ellipse2D.Double[ROWS][COLUMNS];
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
+                Circle test = new Circle(i,j); // pretend this works
+                if (!test.filled) {
+                    g2.setColor(Color.WHITE);   
+                }
+                else if(isYellow) {
+                    g2.setColor(Color.YELLOW); 
+                    !isYellow;
+                }
+                else {
+                    g2.setColor(Color.RED); 
+                    !isYellow;
+                }
+                
                 g2.setColor(Color.WHITE);
                 Ellipse2D.Double circle = new Ellipse2D.Double(2*j*DIAMETER + DIAMETER/2,2*i*DIAMETER + DIAMETER/2,DIAMETER,DIAMETER);
                 circles[i][j] = circle;
@@ -34,7 +47,20 @@ class GridComponent extends JComponent {
         }
     }
 }
-
+class Circle {
+    private boolean filled = false;
+    private int row;
+    private int column;
+    
+    public Circle(int r, int c) {
+        row = r;
+        column = c;
+    }
+    
+    public isFilled() {
+        return filled;   
+    }
+}
 public class ConnectFourLunch {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
