@@ -3,11 +3,11 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.Ellipse2D;
 
-public class Circle extends JComponent {
+public class Circle1 extends JComponent {
     private int xCoord = 0;
     private int yCoord = 0;
 
-    public Circle() {
+    public Circle1() {
         xCoord = 0;
         yCoord = 0;
     }
@@ -26,7 +26,7 @@ public class Circle extends JComponent {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setSize(800,1000);
-        Circle myLittleCircle = new Circle();
+        Circle1 myLittleCircle = new Circle1();
         class MouseClickListener implements MouseListener {
             public void mousePressed(MouseEvent event){}
             public void mouseExited(MouseEvent event){}
