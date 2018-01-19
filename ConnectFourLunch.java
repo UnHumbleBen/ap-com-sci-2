@@ -57,9 +57,11 @@ class Circle {
         column = c;
     }
     
-    public isFilled() {
+    public boolean isFilled() {
         return filled;   
     }
+    
+    public 
 }
 public class ConnectFourLunch {
     public static void main(String[] args) {
