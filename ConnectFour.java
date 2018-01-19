@@ -105,7 +105,7 @@ public class ConnectFour {
             public void mouseClicked(MouseEvent event) {
                 int x = event.getX()/100; //returns x coordinate mouse clicked locaction
                 int y = event.getY()/100; //returns y coordinate
-                myBox.getCircles(x,y).setFilled();
+                myBox.getCircles(y,x).setFilled();
                 myBox.repaint();
                 System.out.println("this works");
             }
