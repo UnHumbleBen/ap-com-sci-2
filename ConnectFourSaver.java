@@ -8,14 +8,14 @@ import java.awt.Color;
 import java.awt.event.*;
 class GridComponent extends JComponent {
     boolean isYellowTurn = false; //initalizes players turns for coloring purposes
-    
+
     //dimensions for box
     final int ROWS = 6;
     final int COLUMNS = 7;
     final int DIAMETER = 50;
     final int BOX_WIDTH = 2*DIAMETER * COLUMNS;
     final int BOX_HEIGHT =  2*DIAMETER * ROWS;
-    
+
     //set up array of circle to keep track of status (filled or not filled/ color/ etc.)
     public Circle[][] circles = new Circle[ROWS][COLUMNS];
     public void createCircles() {
@@ -25,7 +25,7 @@ class GridComponent extends JComponent {
             }
         }
     }
-    
+
     // returns a specific circle (given a row and column) (Used in paint component)
     public  Circle getCircles(int r, int c) {
         return circles[r][c];
@@ -33,7 +33,7 @@ class GridComponent extends JComponent {
 
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        
+
         //draws and fills box
         Rectangle box = new Rectangle(0,0,BOX_WIDTH,BOX_HEIGHT);
         g2.setColor(Color.BLUE);
@@ -67,7 +67,7 @@ class GridComponent extends JComponent {
                 g2.draw(circle);
             }
         }
-        
+
         isYellowTurn = !isYellowTurn; // switch player's turn (for coloring purpose)
     }
 }
@@ -96,15 +96,15 @@ class Circle {
     public void setRed() {
         isYellow = false;
     }
-    
+
     public boolean isYellow() {
         return isYellow;
     }
-    
+
     public boolean isColorDecided() {
         return isColorDecided;
     }
-    
+
     // prevents color from changing
     public void ColorDecided() {
         isColorDecided = true;
@@ -119,18 +119,28 @@ public class ConnectFourSaver {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridComponent C4 = new GridComponent(); //initalizes the board
         C4.createCircles(); // creates circle classes 
-        
+
         class MouseClickListener implements MouseListener {
             public void mousePressed(MouseEvent event){}
+
             public void mouseExited(MouseEvent event){}
+
             public void mouseEntered(MouseEvent event){}
+
             public void mouseReleased(MouseEvent event){}
 
             public void mouseClicked(MouseEvent event) {
-                int x = event.getX()/100; //to find column
-                int y = event.getY()/100; // to find row
-                C4.getCircles(y,x).setFilled();
-                C4.repaint();
+                int x = event.getX()/100; //to find column 
+                
+                //colors lowest empty circle 
+                for (int i = C4.ROWS - 1; i >= 0; i--) {// starts at bottom of array, moves up
+                    if(!C4.getCircles(i,x).isFilled()) {
+                        C4.getCircles(i,x).setFilled();
+                        break;
+                    }
+                }
+                
+                C4.repaint(); //calls paint Component (draws next frame)
             }
         }
         MouseClickListener listener = new MouseClickListener();
