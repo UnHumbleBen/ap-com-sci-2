@@ -130,17 +130,22 @@ public class ConnectFourSaver {
             public void mouseReleased(MouseEvent event){}
 
             public void mouseClicked(MouseEvent event) {
+                boolean newOneAdded = false; // equals true if new circle is colored 
                 int x = event.getX()/100; //to find column 
                 
                 //colors lowest empty circle 
                 for (int i = C4.ROWS - 1; i >= 0; i--) {// starts at bottom of array, moves up
                     if(!C4.getCircles(i,x).isFilled()) {
                         C4.getCircles(i,x).setFilled();
+                        newOneAdded = true;
                         break;
                     }
                 }
                 
-                C4.repaint(); //calls paint Component (draws next frame)
+                // only redraws if a new circle is colored (avoids double turn)
+                if (newOneAdded) {
+                    C4.repaint(); //calls paint Component (draws next frame)
+                }
             }
         }
         MouseClickListener listener = new MouseClickListener();
