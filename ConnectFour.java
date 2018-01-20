@@ -131,7 +131,7 @@ public class ConnectFour {
 
             public void mouseClicked(MouseEvent event) {
                 boolean newOneAdded = false; // equals true if new circle is colored 
-                int x = event.getX()/100; //to find column 
+                int x = event.getX()/(2*C4.DIAMETER); //to find column 
                 
                 //colors lowest empty circle 
                 for (int i = C4.ROWS - 1; i >= 0; i--) {// starts at bottom of array, moves up
