@@ -65,15 +65,13 @@ class GridComponent extends JComponent {
                             if (k == i+3) System.out.println("wins 4 down");
                         }
                     }
-                    
-                    // check left win condition
-                    if(j >= COLUMNS - 4) {
-                        for (int k = j-1; k > j-4; k--) {
-                            if(!circles[i][k].isFilled() || circles[i][k].isYellow() != test.isYellow()) {
-                                break;
-                            }
-                            if (k == j-3) System.out.println("wins 4 left");
-                        }
+
+                    int streak = 0; 
+                    for (int k = 0; k < COLUMNS-1; k++) {
+                        if (circles[i][k].isFilled() && circles[i][k+1].isFilled() && circles[i][k].isYellow() == circles[i][k+1].isYellow()) {
+                            streak++;
+                        } else streak = 0;
+                        if (streak == 3) System.out.println("win horizontal");
                     }
                 }
                 else { // for already decided(finalized) circles
@@ -152,7 +150,7 @@ public class ConnectFour {
             public void mouseClicked(MouseEvent event) {
                 boolean newOneAdded = false; // equals true if new circle is colored 
                 int x = event.getX()/(2*C4.DIAMETER); //to find column 
-                
+
                 if (x < C4.BOX_WIDTH/100) {
                     //colors lowest empty circle 
                     for (int i = C4.ROWS - 1; i >= 0; i--) {// starts at bottom of array, moves up
