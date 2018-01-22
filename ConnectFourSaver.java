@@ -56,8 +56,8 @@ class GridComponent extends JComponent {
                         test.setRed(); // changes to color to red on red player turn
                     }
 
-                    //check bottom four if possible
-                    if(i <= 2) {
+                    //checks vertical win condition
+                    if(i <= ROWS - 4) {
                         for (int k = i+1; k < i+4; k++) {
                             if(circles[k][j].isYellow() != test.isYellow()) {
                                 break;
