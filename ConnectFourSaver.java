@@ -65,6 +65,16 @@ class GridComponent extends JComponent {
                             if (k == i+3) System.out.println("wins 4 down");
                         }
                     }
+                    
+                    // check left win condition
+                    if(j >= COLUMNS - 4) {
+                        for (int k = j-1; k > j-4; k--) {
+                            if(!circles[i][k].isFilled() || circles[i][k].isYellow() != test.isYellow()) {
+                                break;
+                            }
+                            if (k == j-3) System.out.println("wins 4 left");
+                        }
+                    }
                 }
                 else { // for already decided(finalized) circles
                     g2.setColor(Color.YELLOW); //default color is yellow
