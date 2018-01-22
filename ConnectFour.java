@@ -55,6 +55,16 @@ class GridComponent extends JComponent {
                         g2.setColor(Color.RED);
                         test.setRed(); // changes to color to red on red player turn
                     }
+
+                    //check bottom four if possible
+                    if(i <= 2) {
+                        for (int k = i+1; k < i+4; k++) {
+                            if(circles[k][j].isYellow() != test.isYellow()) {
+                                break;
+                            }
+                            if (k == i+3) System.out.println("wins 4 down");
+                        }
+                    }
                 }
                 else { // for already decided(finalized) circles
                     g2.setColor(Color.YELLOW); //default color is yellow
@@ -133,15 +143,17 @@ public class ConnectFour {
                 boolean newOneAdded = false; // equals true if new circle is colored 
                 int x = event.getX()/(2*C4.DIAMETER); //to find column 
                 
-                //colors lowest empty circle 
-                for (int i = C4.ROWS - 1; i >= 0; i--) {// starts at bottom of array, moves up
-                    if(!C4.getCircles(i,x).isFilled()) {
-                        C4.getCircles(i,x).setFilled();
-                        newOneAdded = true;
-                        break;
+                if (x < C4.BOX_WIDTH/100) {
+                    //colors lowest empty circle 
+                    for (int i = C4.ROWS - 1; i >= 0; i--) {// starts at bottom of array, moves up
+                        if(!C4.getCircles(i,x).isFilled()) {
+                            C4.getCircles(i,x).setFilled();
+                            newOneAdded = true;
+                            break;
+                        }
                     }
                 }
-                
+
                 // only redraws if a new circle is colored (avoids double turn)
                 if (newOneAdded) {
                     C4.repaint(); //calls paint Component (draws next frame)
