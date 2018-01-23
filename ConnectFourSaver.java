@@ -7,9 +7,10 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.event.*;
 import java.util.*;
+
 class GridComponent extends JComponent {
     boolean isYellowTurn = false; //initalizes players turns for coloring purposes
-
+    boolean isGameOver= false; // is true when a player wins
     //dimensions for box
     final int ROWS = 6;
     final int COLUMNS = 7;
@@ -56,87 +57,7 @@ class GridComponent extends JComponent {
                         g2.setColor(Color.RED);
                         test.setRed(); // changes to color to red on red player turn
                     }
-
-                    //checks vertical win condition
-                    if(i <= ROWS - 4) {
-                        for (int k = i+1; k < i+4; k++) {
-                            if(circles[k][j].isYellow() != test.isYellow()) {
-                                break;
-                            }
-                            if (k == i+3) System.out.println("wins 4 down");
-                        }
-                    }
-                    
-                    // horizontal win condition
-                    int streak = 0; 
-                    for (int k = 0; k < COLUMNS-1; k++) {
-                        if (circles[i][k].isFilled() && circles[i][k+1].isFilled() && circles[i][k].isYellow() == circles[i][k+1].isYellow()) {
-                            streak++;
-                        } else streak = 0;
-                        if (streak == 3) System.out.println("win horizontal");
-                    }
-                    
-                    // diagonal (going in upward righward direction) win condition
-                    ArrayList<Circle> diagonalUpRight = new ArrayList<>(); 
-                    diagonalUpRight.add(circles[i][j]);
-                    int dRow = i-1;
-                    int dColumn = j+1;
-                    // adds everything above the new circle
-                    while (dRow >= 0 && dColumn <= 6) {
-                        diagonalUpRight.add(circles[dRow][dColumn]);
-                        dRow--;
-                        dColumn++;
-                    }
-                    // adds everything below the new circle
-                    dRow = i+1;
-                    dColumn = j-1;
-                    while (dRow <= 5 && dColumn >= 0) {
-                        diagonalUpRight.add(0, circles[dRow][dColumn]);
-                        dRow++;
-                        dColumn--;
-                    }
-                    if (diagonalUpRight.size() >= 4) {
-                        streak = 0; // same streak variable used in horizontal win condition
-                        for (int k = 0; k < diagonalUpRight.size()-1; k++) {
-                            Circle current = diagonalUpRight.get(k);
-                            Circle next = diagonalUpRight.get(k+1);
-                            if(current.isFilled() && next.isFilled() && current.isYellow() == next.isYellow()) {
-                                streak++;
-                            } else streak = 0;
-                            if (streak == 3) System.out.println("win diagonal (up right)");
-                        }
-                    }
-                    
-                    // diagonal upward leftware direction win condition
-                    ArrayList<Circle> diagonalUpLeft = new ArrayList<>(); 
-                    diagonalUpLeft.add(circles[i][j]);
-                    int dlRow = i-1;
-                    int dlColumn = j-1;
-                    // adds everything above the new circle
-                    while (dlRow >= 0 && dlColumn >= 0) {
-                        diagonalUpLeft.add(circles[dlRow][dlColumn]);
-                        dlRow--;
-                        dlColumn--;
-                    }
-                    // adds everything below the new circle
-                    dlRow = i+1;
-                    dlColumn = j+1;
-                    while (dlRow <= 5 && dlColumn <= 6) {
-                        diagonalUpLeft.add(0, circles[dlRow][dlColumn]);
-                        dlRow++;
-                        dlColumn++;
-                    }
-                    if (diagonalUpLeft.size() >= 4) {
-                        streak = 0; // same streak variable used in horizontal win condition
-                        for (int k = 0; k < diagonalUpLeft.size()-1; k++) {
-                            Circle current = diagonalUpLeft.get(k);
-                            Circle next = diagonalUpLeft.get(k+1);
-                            if(current.isFilled() && next.isFilled() && current.isYellow() == next.isYellow()) {
-                                streak++;
-                            } else streak = 0;
-                            if (streak == 3) System.out.println("win diagonal (up left)");
-                        }
-                    }
+                    isGameOver(test);
                 }
                 else { // for already decided(finalized) circles
                     g2.setColor(Color.YELLOW); //default color is yellow
@@ -149,8 +70,93 @@ class GridComponent extends JComponent {
                 g2.draw(circle);
             }
         }
-
         isYellowTurn = !isYellowTurn; // switch player's turn (for coloring purpose)
+    }
+
+    public void isGameOver(Circle test)  {
+        int i = test.getRow();
+        int j = test.getColumn();
+
+        //checks vertical win condition
+        if(i <= ROWS - 4) {
+            for (int k = i+1; k < i+4; k++) {
+                if(circles[k][j].isYellow() != test.isYellow()) {
+                    break;
+                }
+                if (k == i+3) isGameOver = true;
+            }
+        }
+
+        // horizontal win condition
+        int streak = 0; 
+        for (int k = 0; k < COLUMNS-1; k++) {
+            if (circles[i][k].isFilled() && circles[i][k+1].isFilled() && circles[i][k].isYellow() == circles[i][k+1].isYellow()) {
+                streak++;
+            } else streak = 0;
+            if (streak == 3) isGameOver = true;
+        }
+
+        // diagonal (going in upward righward direction) win condition
+        ArrayList<Circle> diagonalUpRight = new ArrayList<>(); 
+        diagonalUpRight.add(circles[i][j]);
+        int dRow = i-1;
+        int dColumn = j+1;
+        // adds everything above the new circle
+        while (dRow >= 0 && dColumn <= 6) {
+            diagonalUpRight.add(circles[dRow][dColumn]);
+            dRow--;
+            dColumn++;
+        }
+        // adds everything below the new circle
+        dRow = i+1;
+        dColumn = j-1;
+        while (dRow <= 5 && dColumn >= 0) {
+            diagonalUpRight.add(0, circles[dRow][dColumn]);
+            dRow++;
+            dColumn--;
+        }
+        if (diagonalUpRight.size() >= 4) {
+            streak = 0; // same streak variable used in horizontal win condition
+            for (int k = 0; k < diagonalUpRight.size()-1; k++) {
+                Circle current = diagonalUpRight.get(k);
+                Circle next = diagonalUpRight.get(k+1);
+                if(current.isFilled() && next.isFilled() && current.isYellow() == next.isYellow()) {
+                    streak++;
+                } else streak = 0;
+                if (streak == 3) isGameOver = true;
+            }
+        }
+
+        // diagonal upward leftware direction win condition
+        ArrayList<Circle> diagonalUpLeft = new ArrayList<>(); 
+        diagonalUpLeft.add(circles[i][j]);
+        int dlRow = i-1;
+        int dlColumn = j-1;
+        // adds everything above the new circle
+        while (dlRow >= 0 && dlColumn >= 0) {
+            diagonalUpLeft.add(circles[dlRow][dlColumn]);
+            dlRow--;
+            dlColumn--;
+        }
+        // adds everything below the new circle
+        dlRow = i+1;
+        dlColumn = j+1;
+        while (dlRow <= 5 && dlColumn <= 6) {
+            diagonalUpLeft.add(0, circles[dlRow][dlColumn]);
+            dlRow++;
+            dlColumn++;
+        }
+        if (diagonalUpLeft.size() >= 4) {
+            streak = 0; // same streak variable used in horizontal win condition
+            for (int k = 0; k < diagonalUpLeft.size()-1; k++) {
+                Circle current = diagonalUpLeft.get(k);
+                Circle next = diagonalUpLeft.get(k+1);
+                if(current.isFilled() && next.isFilled() && current.isYellow() == next.isYellow()) {
+                    streak++;
+                } else streak = 0;
+                if (streak == 3) isGameOver = true;
+            }
+        }
     }
 }
 
@@ -165,6 +171,14 @@ class Circle {
     public Circle(int r, int c) {// constructs circles given position (used in createCircles())
         row = r;
         column = c;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
     }
 
     public boolean isFilled() {
@@ -212,23 +226,25 @@ public class ConnectFourSaver {
             public void mouseReleased(MouseEvent event){}
 
             public void mouseClicked(MouseEvent event) {
-                boolean newOneAdded = false; // equals true if new circle is colored 
-                int x = event.getX()/(2*C4.DIAMETER); //to find column 
+                if (!C4.isGameOver) {
+                    boolean newOneAdded = false; // equals true if new circle is colored 
+                    int x = event.getX()/(2*C4.DIAMETER); //to find column 
 
-                if (x < C4.BOX_WIDTH/100) {
-                    //colors lowest empty circle 
-                    for (int i = C4.ROWS - 1; i >= 0; i--) {// starts at bottom of array, moves up
-                        if(!C4.getCircles(i,x).isFilled()) {
-                            C4.getCircles(i,x).setFilled();
-                            newOneAdded = true;
-                            break;
+                    if (x < C4.BOX_WIDTH/100) {
+                        //colors lowest empty circle 
+                        for (int i = C4.ROWS - 1; i >= 0; i--) {// starts at bottom of array, moves up
+                            if(!C4.getCircles(i,x).isFilled()) {
+                                C4.getCircles(i,x).setFilled();
+                                newOneAdded = true;
+                                break;
+                            }
                         }
                     }
-                }
 
-                // only redraws if a new circle is colored (avoids double turn)
-                if (newOneAdded) {
-                    C4.repaint(); //calls paint Component (draws next frame)
+                    // only redraws if a new circle is colored (avoids double turn)
+                    if (newOneAdded) {
+                        C4.repaint(); //calls paint Component (draws next frame)
+                    }
                 }
             }
         }
