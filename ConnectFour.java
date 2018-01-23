@@ -79,7 +79,7 @@ class GridComponent extends JComponent {
     public void isGameOver(Circle test)  {
         int i = test.getRow();
         int j = test.getColumn();
-
+        
         //checks vertical win condition
         if(i <= ROWS - 4) {
             for (int k = i+1; k < i+4; k++) {
@@ -102,33 +102,23 @@ class GridComponent extends JComponent {
         // diagonal (going in upward righward direction) win condition
         ArrayList<Circle> diagonalUpRight = new ArrayList<>(); 
         diagonalUpRight.add(circles[i][j]);
-        int dRow = i-1;
-        int dColumn = j+1;
+        int drRow = i-1;
+        int drColumn = j+1;
         // adds everything above the new circle
-        while (dRow >= 0 && dColumn <= 6) {
-            diagonalUpRight.add(circles[dRow][dColumn]);
-            dRow--;
-            dColumn++;
+        while (drRow >= 0 && drColumn <= 6) {
+            diagonalUpRight.add(circles[drRow][drColumn]);
+            drRow--;
+            drColumn++;
         }
         // adds everything below the new circle
-        dRow = i+1;
-        dColumn = j-1;
-        while (dRow <= 5 && dColumn >= 0) {
-            diagonalUpRight.add(0, circles[dRow][dColumn]);
-            dRow++;
-            dColumn--;
+        drRow = i+1;
+        drColumn = j-1;
+        while (drRow <= 5 && drColumn >= 0) {
+            diagonalUpRight.add(0, circles[drRow][drColumn]);
+            drRow++;
+            drColumn--;
         }
-        if (diagonalUpRight.size() >= 4) {
-            streak = 0; // same streak variable used in horizontal win condition
-            for (int k = 0; k < diagonalUpRight.size()-1; k++) {
-                Circle current = diagonalUpRight.get(k);
-                Circle next = diagonalUpRight.get(k+1);
-                if(current.isFilled() && next.isFilled() && current.isYellow() == next.isYellow()) {
-                    streak++;
-                } else streak = 0;
-                if (streak == 3) isGameOver = true;
-            }
-        }
+        isFourInARow(diagonalUpRight);
 
         // diagonal upward leftware direction win condition
         ArrayList<Circle> diagonalUpLeft = new ArrayList<>(); 
@@ -149,15 +139,20 @@ class GridComponent extends JComponent {
             dlRow++;
             dlColumn++;
         }
-        if (diagonalUpLeft.size() >= 4) {
-            streak = 0; // same streak variable used in horizontal win condition
-            for (int k = 0; k < diagonalUpLeft.size()-1; k++) {
-                Circle current = diagonalUpLeft.get(k);
-                Circle next = diagonalUpLeft.get(k+1);
+        isFourInARow(diagonalUpLeft);
+    }
+    
+    // check for 4 same colors in a row in a arraylist of circle (used in isGameOver())
+    public void isFourInARow(ArrayList<Circle> c) {
+        if (c.size() >= 4) {
+            int streak = 1; // same streak variable used in horizontal win condition
+            for (int k = 0; k < c.size()-1; k++) {
+                Circle current = c.get(k);
+                Circle next = c.get(k+1);
                 if(current.isFilled() && next.isFilled() && current.isYellow() == next.isYellow()) {
                     streak++;
-                } else streak = 0;
-                if (streak == 3) isGameOver = true;
+                } else streak = 1;
+                if (streak == 4) isGameOver = true;
             }
         }
     }

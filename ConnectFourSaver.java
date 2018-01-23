@@ -79,7 +79,7 @@ class GridComponent extends JComponent {
     public void isGameOver(Circle test)  {
         int i = test.getRow();
         int j = test.getColumn();
-
+        
         //checks vertical win condition
         if(i <= ROWS - 4) {
             for (int k = i+1; k < i+4; k++) {
