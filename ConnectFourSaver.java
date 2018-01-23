@@ -58,6 +58,9 @@ class GridComponent extends JComponent {
                         test.setRed(); // changes to color to red on red player turn
                     }
                     isGameOver(test);
+                    if (isGameOver) {
+                        g2.drawString("THE PLAYER WITH THE SAME COLOR AS THIS TEXT JUST WON!", BOX_WIDTH/2-150 , BOX_HEIGHT+30); 
+                    }
                 }
                 else { // for already decided(finalized) circles
                     g2.setColor(Color.YELLOW); //default color is yellow
@@ -210,7 +213,7 @@ class Circle {
 public class ConnectFourSaver {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
-        frame.setSize(750,650);
+        frame.setSize(750,750);
         frame.setTitle("Connect Four");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridComponent C4 = new GridComponent(); //initalizes the board
