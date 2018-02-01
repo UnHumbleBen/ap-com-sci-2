@@ -80,11 +80,11 @@ class GridComponent extends JComponent {
         int i = test.getRow();
         int j = test.getColumn();
         ArrayList<Circle> tests = new ArrayList<>();// to check win conditions
-
-        for (int k = i; k < ROWS; k++) {
+        // vertical win condition
+        for (int k = i; k < ROWS; k++) { // arraylist all circles in column
             tests.add(circles[k][j]);
         }
-        isFourInARow(tests);
+        isFourInARow(tests); // tests and empties arraylist for next win conditions tests
         tests.clear();
         // horizontal win condition
         for (int k = 0; k < COLUMNS; k++) {
