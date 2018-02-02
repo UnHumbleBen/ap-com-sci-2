@@ -18,7 +18,7 @@ class Bubble extends JComponent{
     private boolean right1 = true; //head
     private boolean right2 = true; //body
     private boolean right3 = true;  //legs
-    final private int legWidth = 20;
+    final private int legWidth = 15;
     final private int armWidth = 10;
     final private int portalW = 15;
     public void paintComponent(Graphics g) {
@@ -47,13 +47,17 @@ class Bubble extends JComponent{
         g2.fill(eye1);
         g2.fill(eye2);
         
-        g2.setColor(Color.YELLOW);
+        
         Rectangle body = new Rectangle(x2,y2,50,50);
         Rectangle leg1 = new Rectangle(x3,y3, 50, legWidth);
         Rectangle leg2 = new Rectangle(x3,y3 + 50 - legWidth, 50, legWidth);
         Rectangle arm1 = new Rectangle(armX,y2 - armWidth, 40, armWidth);
         Rectangle arm2 = new Rectangle(armX,y2 + 50, 40, armWidth);
+        
+        g2.setColor(Color.RED);
         g2.fill(body);
+        
+        g2.setColor(Color.YELLOW);
         g2.fill(leg1);
         g2.fill(leg2);
         g2.fill(arm1);
