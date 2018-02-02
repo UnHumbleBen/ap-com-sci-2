@@ -37,7 +37,7 @@ class Bubble extends JComponent{
         g2.draw(circle);
     }
 }
-public class Animation
+public class MovingVehicle
 {
     public static void main(String[] args) throws InterruptedException{
         JFrame frame = new JFrame();
