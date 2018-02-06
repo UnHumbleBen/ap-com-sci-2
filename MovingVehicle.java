@@ -26,43 +26,46 @@ class Bubble extends JComponent{
         g2.setColor(Color.BLACK);
         Rectangle back = new Rectangle(0,0,500,500);
         g2.fill(back);
+
         
-        g2.setColor(Color.GREEN);
         Ellipse2D.Double portal1 = new Ellipse2D.Double(0,startY - 30 ,portalW,120);
         Ellipse2D.Double portal2 = new Ellipse2D.Double(500-portalW,startY - 30 ,portalW,120);
         Ellipse2D.Double portal3 = new Ellipse2D.Double(500-portalW,450 - startY - 30 ,portalW,120);
         Ellipse2D.Double portal4 = new Ellipse2D.Double(0,450 - startY - 30 ,portalW,120);
-        g2.fill(portal1);
-        g2.fill(portal2);
-        g2.fill(portal3);
-        g2.fill(portal4);
-        
+        g2.setColor(Color.GREEN);
+        if ((right3 && x3 > 0)|| x3 >= 450  ) {
+            g2.fill(portal2);
+            if (x3 >= 300) g2.fill(portal3);
+        }
+        else  {
+            if (x3 <= 100) g2.fill(portal1);
+            g2.fill(portal4);
+        }
         g2.setColor(Color.WHITE);
         Ellipse2D.Double circle = new Ellipse2D.Double(x1,y1,50,50);
         g2.fill(circle);
-        
+
         g2.setColor(Color.BLUE);
         Ellipse2D.Double eye1 = new Ellipse2D.Double(x1 + 20, y1 + 16, 10, 10);
         Ellipse2D.Double eye2 = new Ellipse2D.Double(x1 + 20,y1 + 33 , 10, 10);
         g2.fill(eye1);
         g2.fill(eye2);
-        
-        
+
         Rectangle body = new Rectangle(x2,y2,50,50);
         Rectangle leg1 = new Rectangle(x3,y3, 50, legWidth);
         Rectangle leg2 = new Rectangle(x3,y3 + 50 - legWidth, 50, legWidth);
         Rectangle arm1 = new Rectangle(armX,y2 - armWidth, 40, armWidth);
         Rectangle arm2 = new Rectangle(armX,y2 + 50, 40, armWidth);
-        
+
         g2.setColor(Color.RED);
         g2.fill(body);
-        
+
         g2.setColor(Color.YELLOW);
         g2.fill(leg1);
         g2.fill(leg2);
         g2.fill(arm1);
         g2.fill(arm2);
-        
+
         g2.setColor(Color.BLACK);
         if (right1) {
             x1 += 50;
@@ -104,10 +107,7 @@ class Bubble extends JComponent{
         if (x3 > 450 || x3 < 0) right3 = !right3;
 
         g2.draw(back);
-        g2.draw(portal1);
-        g2.draw(portal2);
-        g2.draw(portal3);
-        g2.draw(portal4);
+
         g2.draw(body);
         g2.draw(arm1);
         g2.draw(arm2);
