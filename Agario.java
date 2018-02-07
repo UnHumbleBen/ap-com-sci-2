@@ -13,17 +13,48 @@ class Prey {
     private int xPos = random.nextInt(300);
     private int yPos = random.nextInt(300);
     private final int DIAMETER = 10;
-
+    
+    private int xVel = random.nextInt(10);
+    private int yVel = random.nextInt(10);
+    
+    private boolean isRight = true;
+    private boolean isDown = true;
+    
     public int getX() {
         return xPos;
     }
+    
+    public void setX(int newX) {
+        xPos = newX;
+    }
 
+    public void setY(int newY) {
+        yPos = newY;
+    }
+    
     public int getY() {
         return yPos;
     }
 
     public int getDiameter() {
         return DIAMETER;
+    }
+    
+    public void xCollision() {
+        isRight = !isRight;
+        xVel = random.nextInt(10);
+        if (!isRight) xVel = -1*xVel;
+    }
+    
+    public void yCollision() {
+        isDown = !isDown;
+        yVel = random.nextInt(10);
+        if (!isDown) yVel = -1*yVel;
+    }
+    
+    public void move() {
+        xPos += xVel;
+        yPos += yVel;
     }
 }
 
@@ -56,15 +87,27 @@ class Micro extends JComponent {
         Graphics2D g2 = (Graphics2D) g;
         Rectangle frame = new Rectangle(0,0, frameWidth, frameHeight);
         g2.draw(frame);
-        Rectangle redButton = new Rectangle(frameWidth + 10, frameHeight/2 -60, 50, 50);
+        g2.setColor(Color.RED);
+        Rectangle redButton = new Rectangle(frameWidth + 10, frameHeight/2 + 60, 50, 50);
         g2.draw(redButton);
-        Rectangle blueButton = new Rectangle(frameWidth + 10, frameHeight/2 + 60, 50, 50);
+        g2.fill(redButton);
+        
+        g2.setColor(Color.BLUE);
+        Rectangle blueButton = new Rectangle(frameWidth + 10, frameHeight/2 - 60, 50, 50);
         g2.draw(blueButton);
-        //Prey test = new Prey(); 
-        //preys.add(test);
+        g2.fill(blueButton);
+
         for (Prey p : preys) {
             g2.setColor(Color.BLUE);
+            if (p.getX() <= 0 || p.getX() >= frameWidth - p.getDiameter()) {
+                p.xCollision();
+            }
+            if (p.getY() <= 0 || p.getY() >= frameHeight - p.getDiameter()) {
+                p.yCollision();
+            }
             Ellipse2D.Double newPrey = new Ellipse2D.Double(p.getX(), p.getY(), p.getDiameter(), p.getDiameter());
+            p.move();
+            
             g2.fill(newPrey);
             g2.draw(newPrey);
         }
@@ -105,10 +148,11 @@ public class Agario
                     Prey newPrey = new Prey(); 
                     myAgario.preys.add(newPrey);
                 } 
-                
-                
-                Predator newPredator = new Predator();
-                myAgario.predators.add(newPredator);
+
+                if (x >= 410 && x <= 460 && y >= 260 && y <= 310) {
+                    Predator newPredator = new Predator();
+                    myAgario.predators.add(newPredator);
+                }
             }
         }
         MouseClickListener listener = new MouseClickListener();
@@ -116,7 +160,7 @@ public class Agario
 
         frame.add(myAgario);
         while (true) {
-            Thread.sleep(500);
+            Thread.sleep(10);
             myAgario.repaint();
             frame.setVisible(true);
         }
