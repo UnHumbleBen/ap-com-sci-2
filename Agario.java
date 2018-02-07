@@ -14,8 +14,8 @@ class Prey {
     private int yPos = random.nextInt(300);
     private final int DIAMETER = 10;
     
-    private int xVel = random.nextInt(10);
-    private int yVel = random.nextInt(10);
+    private int xVel = random.nextInt(9) + 1;
+    private int yVel = random.nextInt(9) + 1;
     
     private boolean isRight = true;
     private boolean isDown = true;
@@ -42,14 +42,27 @@ class Prey {
     
     public void xCollision() {
         isRight = !isRight;
-        xVel = random.nextInt(10);
-        if (!isRight) xVel = -1*xVel;
+        xVel = random.nextInt(9)+1;
+
+        if (!isRight) {
+            xVel = -1*xVel;
+            xPos = 400-DIAMETER;
+        }
+        else {
+            xPos = 0;
+        }
     }
     
     public void yCollision() {
         isDown = !isDown;
-        yVel = random.nextInt(10);
-        if (!isDown) yVel = -1*yVel;
+        yVel = random.nextInt(9)+1;
+        if (!isDown) {
+            yVel = -1*yVel;
+            yPos = 400-DIAMETER;
+        }
+        else {
+            yPos = 0;
+        }
     }
     
     public void move() {
@@ -160,7 +173,7 @@ public class Agario
 
         frame.add(myAgario);
         while (true) {
-            Thread.sleep(10);
+            Thread.sleep(50);
             myAgario.repaint();
             frame.setVisible(true);
         }
