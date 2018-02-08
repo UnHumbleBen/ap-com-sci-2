@@ -18,8 +18,11 @@ class CircleComponent extends JComponent {
 
 class RectangleComponent extends JComponent {
     public void paintComponent(Graphics g) {
+        int x = 50;
         Graphics2D g2 = (Graphics2D) g;
-        Rectangle box = new Rectangle(50,50,50,150);
+        Rectangle box = new Rectangle(x,50,50,150);
+        x = 200;
+        
         g2.setColor(Color.ORANGE);
         g2.draw(box);
         g2.setColor(Color.RED);
