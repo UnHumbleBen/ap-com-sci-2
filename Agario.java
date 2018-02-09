@@ -12,7 +12,7 @@ class Prey {
     Random random = new Random(); 
     private int xPos = random.nextInt(300);
     private int yPos = random.nextInt(300);
-    private int diameter;
+    protected int diameter;
 
     private int xVel = random.nextInt(9) + 1;
     private int yVel = random.nextInt(9) + 1;
@@ -73,11 +73,15 @@ class Prey {
         xPos += xVel;
         yPos += yVel;
     }
+    
 }
 
 class Predator extends Prey{
     public Predator(int newDiameter) {
         super(newDiameter);
+    }
+    public void eats(Prey p) {
+        diameter += p.getDiameter();
     }
 }
 
@@ -107,7 +111,13 @@ class Micro extends JComponent {
             int topBound = predator.getY();
             int bottomBound = predator.getY() + predator.getDiameter();
             for (Prey prey : preys) {
-               
+               int preyX = prey.getX();
+               int preyY = prey.getY();
+               int preyDiameter = prey.getDiameter();
+               if (preyX >= leftBound && preyX <= rightBound - preyDiameter && preyY >= topBound && preyY <= bottomBound - preyDiameter) {
+                   predator.eats(prey);
+                   preys.remove(prey); 
+               }
             }
         }
 
