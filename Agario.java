@@ -105,12 +105,14 @@ class Micro extends JComponent {
         g2.draw(blueButton);
         g2.fill(blueButton);
 
-        for (Predator predator : predators) {
+        for (int i = 0; i < predators.size(); i++) {
+            Predator predator = predators.get(i);
             int leftBound = predator.getX();
             int rightBound = predator.getX() + predator.getDiameter();
             int topBound = predator.getY();
             int bottomBound = predator.getY() + predator.getDiameter();
-            for (Prey prey : preys) {
+            for (int j = 0; j < preys.size(); j++) {
+               Prey prey = preys.get(j);
                int preyX = prey.getX();
                int preyY = prey.getY();
                int preyDiameter = prey.getDiameter();
@@ -192,7 +194,7 @@ public class Agario
 
         frame.add(myAgario);
         while (true) {
-            Thread.sleep(50);
+            Thread.sleep(10);
             myAgario.repaint();
             frame.setVisible(true);
         }
