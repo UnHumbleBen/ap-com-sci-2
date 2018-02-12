@@ -17,8 +17,8 @@ class Prey {
     private int xVel = random.nextInt(9) + 1;
     private int yVel = random.nextInt(9) + 1;
 
-    private boolean isRight = true;
-    private boolean isDown = true;
+    protected boolean isRight = true;
+    protected boolean isDown = true;
 
     public Prey(int newDiameter) {
         diameter = newDiameter;
@@ -47,7 +47,6 @@ class Prey {
     public void xCollision() {
         isRight = !isRight;
         xVel = random.nextInt(9)+1;
-        
         if (!isRight) {
             xVel = -1*xVel;
             xPos = 400-diameter;
@@ -82,17 +81,40 @@ class Predator extends Prey{
     }
 
     public void eats(Prey p) {
-        System.out.println("Eat");
-        System.out.println("Position before eating: (" + getX() + "," + getY() + ")");
-        System.out.println("Center Position before eating: (" + ((getX() + getDiameter()/2)) + "," + (getY() + getDiameter()/2) + ")");
-        int x1 = getX();
-        int x2 = getY();
+        //System.out.println("Eat");
+        //System.out.println("Position before eating: (" + getX() + "," + getY() + ")");
+        //System.out.println("Center Position before eating: (" + ((getX() + getDiameter()/2)) + "," + (getY() + getDiameter()/2) + ")");
+        //int x1 = getX() + getDiameter()/2;
+        //int y1 = getY() + getDiameter()/2;
         diameter += p.getDiameter();
         setX(getX() - p.getDiameter()/2);
         setY(getY() - p.getDiameter()/2);
-        System.out.println("Position after eating: (" + getX() + "," + getY() + ")");
-        System.out.println("Center Position after eating: (" + ((getX() + getDiameter()/2)) + "," + (getY() + getDiameter()/2) + ")");
-        System.out.println("Center differennce before and after: (" + (getX() - x1) + "," + (getY() -x2 ) + ")");  
+        //int x2 = getX() + getDiameter()/2;
+        //int y2 = getY() + getDiameter()/2;
+        //System.out.println("Position after eating: (" + getX() + "," + getY() + ")");
+        //System.out.println("Center Position after eating: (" + ((getX() + getDiameter()/2)) + "," + (getY() + getDiameter()/2) + ")");
+        //System.out.println("Center differennce before and after: (" + (x2 - x1) + "," + (y2 - y1) + ")");  
+    
+        if (getX() <= 0) {
+            setX(0);
+            isRight = false;
+            System.out.println("left wall");
+        }
+        if (getX() >= 400 - diameter) {
+            setX(400 - diameter);
+            isRight = true;
+            System.out.println("right wall");
+        }
+        if (getY() <= 0) {
+            setY(0);
+            isDown = false;
+            System.out.println("up wall");
+        }
+        if (getY() >= 400 - diameter) {
+            setY(400 - diameter);
+            isDown = true;
+            System.out.println("down wall");
+        }
     }
 }
 
@@ -154,7 +176,6 @@ class Micro extends JComponent {
                         predators.remove(predator);
                     }
                 }
-
             }
         }
 
@@ -181,9 +202,8 @@ class Micro extends JComponent {
             if (p.getY() <= 0 || p.getY() >= frameHeight - p.getDiameter()) {
                 p.yCollision();
             }
-            Ellipse2D.Double newPrey = new Ellipse2D.Double(p.getX(), p.getY(), p.getDiameter(), p.getDiameter());
-            p.move();
             Ellipse2D.Double newPredator = new Ellipse2D.Double(p.getX(), p.getY(), p.getDiameter(), p.getDiameter());
+            p.move();
             g2.fill(newPredator);
             g2.draw(newPredator);
         }
