@@ -8,6 +8,7 @@ interface Operator {
 }
 */
 interface Custodian {
+    int a = 0;
     void task3();
 }
 abstract class Operator {
@@ -17,12 +18,15 @@ abstract class Operator {
     abstract public void task1();
     public int getHours() {return hours;}
 }
-interface Operator2 {
-    
-}
-public class Kevin extends Operator {
+
+class Worker extends Operator {
     public void task1() {
         System.out.print("");
+    }
+}
+
+public class InterfaceTester {
+    public static void main(String[] args) {
         
     }
 }
