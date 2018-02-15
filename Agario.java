@@ -24,6 +24,14 @@ class Prey {
         diameter = newDiameter;
     }
 
+    public boolean isRight() {
+        return isRight;
+    }
+
+    public boolean isDown() {
+        return isDown;
+    }
+
     public int getX() {
         return xPos;
     }
@@ -34,6 +42,22 @@ class Prey {
 
     public void setY(int newY) {
         yPos = newY;
+    }
+
+    public int getXVel() {
+        return xVel;
+    }
+
+    public int getYVel() {
+        return yVel;
+    }
+
+    public void setXVel(int newXVel) {
+        xVel = newXVel;
+    }
+
+    public void setYVel(int newYVel) {
+        yVel = newYVel;
     }
 
     public int getY() {
@@ -73,6 +97,13 @@ class Prey {
         yPos += yVel;
     }
 
+    public void setIsRight(boolean newIsRight) {
+        isRight = newIsRight;
+    }
+
+    public void setIsDown(boolean newIsDown) {
+        isDown = newIsDown;
+    }
 }
 
 class Predator extends Prey{
@@ -81,39 +112,43 @@ class Predator extends Prey{
     }
 
     public void eats(Prey p) {
-        //System.out.println("Eat");
-        //System.out.println("Position before eating: (" + getX() + "," + getY() + ")");
-        //System.out.println("Center Position before eating: (" + ((getX() + getDiameter()/2)) + "," + (getY() + getDiameter()/2) + ")");
-        //int x1 = getX() + getDiameter()/2;
-        //int y1 = getY() + getDiameter()/2;
-        diameter += p.getDiameter();
-        setX(getX() - p.getDiameter()/2);
-        setY(getY() - p.getDiameter()/2);
-        //int x2 = getX() + getDiameter()/2;
-        //int y2 = getY() + getDiameter()/2;
-        //System.out.println("Position after eating: (" + getX() + "," + getY() + ")");
-        //System.out.println("Center Position after eating: (" + ((getX() + getDiameter()/2)) + "," + (getY() + getDiameter()/2) + ")");
-        //System.out.println("Center differennce before and after: (" + (x2 - x1) + "," + (y2 - y1) + ")");  
-    
-        if (getX() <= 0) {
-            setX(0);
-            isRight = false;
-            System.out.println("left wall");
-        }
-        if (getX() >= 400 - diameter) {
-            setX(400 - diameter);
-            isRight = true;
-            System.out.println("right wall");
-        }
-        if (getY() <= 0) {
-            setY(0);
-            isDown = false;
-            System.out.println("up wall");
-        }
-        if (getY() >= 400 - diameter) {
-            setY(400 - diameter);
-            isDown = true;
-            System.out.println("down wall");
+        if (diameter < 400) {
+            //System.out.println("Eat");
+            //System.out.println("Position before eating: (" + getX() + "," + getY() + ")");
+            //System.out.println("Center Position before eating: (" + ((getX() + getDiameter()/2)) + "," + (getY() + getDiameter()/2) + ")");
+            //int x1 = getX() + getDiameter()/2;
+            //int y1 = getY() + getDiameter()/2;
+            diameter += p.getDiameter();
+            setX(getX() - p.getDiameter()/2);
+            setY(getY() - p.getDiameter()/2);
+            //int x2 = getX() + getDiameter()/2;
+            //int y2 = getY() + getDiameter()/2;
+            //System.out.println("Position after eating: (" + getX() + "," + getY() + ")");
+            //System.out.println("Center Position after eating: (" + ((getX() + getDiameter()/2)) + "," + (getY() + getDiameter()/2) + ")");
+            //System.out.println("Center differennce before and after: (" + (x2 - x1) + "," + (y2 - y1) + ")");  
+
+            if (getX() <= 0) {
+                setX(0);
+                isRight = false;
+                System.out.println("left wall");
+            }
+            if (getX() >= 400 - diameter) {
+                setX(400 - diameter);
+                isRight = true;
+                System.out.println("right wall");
+            }
+            if (getY() <= 0) {
+                setY(0);
+                isDown = false;
+                System.out.println("up wall");
+            }
+            if (getY() >= 400 - diameter) {
+                setY(400 - diameter);
+                isDown = true;
+                System.out.println("down wall");
+            } 
+
+            if (diameter > 400) diameter = 400;
         }
     }
 }
@@ -137,12 +172,12 @@ class Micro extends JComponent {
         Rectangle blueButton = new Rectangle(frameWidth + 10, frameHeight/2 - 60, 50, 50);
         g2.draw(blueButton);
         g2.fill(blueButton);
-        
+
         g2.setColor(Color.GREEN);
         Rectangle greenButton = new Rectangle(frameWidth + 10, frameHeight/2, 50, 30);
         g2.draw(greenButton);
         g2.fill(greenButton);
-        
+
         for (int i = 0; i < predators.size(); i++) {
             Predator predator = predators.get(i);
             int leftBound = predator.getX();
@@ -154,6 +189,8 @@ class Micro extends JComponent {
                 int preyX = prey.getX();
                 int preyY = prey.getY();
                 int preyDiameter = prey.getDiameter();
+
+                //preyCollision(predator,prey);
                 if (preyX >= leftBound && preyX <= rightBound - preyDiameter && preyY >= topBound && preyY <= bottomBound - preyDiameter) {
                     predator.eats(prey);
                     preys.remove(prey); 
@@ -166,6 +203,7 @@ class Micro extends JComponent {
                 int predator2Y = predator2.getY();
                 int predator2D = predator2.getDiameter();
 
+                //preyCollision(predator,predator2);
                 if (predator2X >= leftBound && predator2X <= rightBound - predator2D && predator2Y >= topBound && predator2Y <= bottomBound - predator2D) {
                     if (predator.getDiameter() > predator2D) {
                         predator.eats(predator2);
@@ -208,7 +246,33 @@ class Micro extends JComponent {
             g2.draw(newPredator);
         }
     }
-    
+
+    public void preyCollision (Prey a, Prey b) {
+        int aLeftBound = a.getX();
+        int aRightBound = a.getX() + a.getDiameter();
+        int aTopBound = a.getY();
+        int aBottomBound = a.getY() + a.getDiameter();
+
+        int bX = b.getX();
+        int bY = b.getY();
+        if (bX >= aLeftBound && bX >= aRightBound && bY >= aTopBound && bY <= aBottomBound) {
+            boolean aTempIsRight = a.isRight();
+            boolean aTempIsDown = a.isDown();
+            int aXVel = a.getXVel();
+            int aYVel = b.getYVel();
+
+            a.setXVel(b.getXVel());
+            a.setYVel(b.getYVel());
+            a.setIsRight(b.isRight());
+            a.setIsDown(b.isDown());
+
+            b.setXVel(aXVel);
+            b.setYVel(aYVel);
+            b.setIsRight(aTempIsRight);
+            b.setIsDown(aTempIsDown);
+        }
+    }
+
     public void resetAll() {
         preys.clear();
         predators.clear();
@@ -239,15 +303,20 @@ public class Agario
                 int y = event.getY();
 
                 if (x >= 410 && x <= 460 && y >= 140 && y <= 190) {
-                    Prey newPrey = new Prey(10); 
-                    myAgario.preys.add(newPrey);
+                    for (int i = 0; i < 1; i++) {
+                        Prey newPrey = new Prey(10); 
+                        myAgario.preys.add(newPrey);
+                    }
+
                 } 
 
                 if (x >= 410 && x <= 460 && y >= 260 && y <= 310) {
-                    Predator newPredator = new Predator(50);
-                    myAgario.predators.add(newPredator);
+                    for (int i = 0; i < 1; i++) {
+                        Predator newPredator = new Predator(50);
+                        myAgario.predators.add(newPredator);
+                    }
                 }
-                
+
                 if (x >= 410 && x <= 460 && y >= 200 && y <= 230) {
                     myAgario.resetAll();
                 }
@@ -257,10 +326,11 @@ public class Agario
         myAgario.addMouseListener(listener);
 
         frame.add(myAgario);
-        while (true) {
+        do {
             Thread.sleep(50);
             myAgario.repaint();
             frame.setVisible(true);
         }
+        while (true);
     }
 }

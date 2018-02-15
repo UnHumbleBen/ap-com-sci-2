@@ -1,22 +1,22 @@
 import java.util.*;
 
 class Animal {
-    private int age = 5;
+    protected int age = 5;
     private String name = "notUsed";
     public Animal() {
         age = 10;
         name = "Used";
         System.out.println("I was used");
     }
-    
+
     public String talk() {
         return "";
     }
-    
+
     public int getAge() {
         return age;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -24,10 +24,15 @@ class Animal {
 
 class Cat extends Animal {
     
+    public Cat() {
+        super();
+    }
+
     public String talk() {
+        System.out.println("Age: " + age);
         return "Meow";
     }
-    
+
     public String sit() {
         return "sit"; 
     }
@@ -35,7 +40,6 @@ class Cat extends Animal {
 
 class Dog extends Animal {
 
-    
     public String talk() {
         return "Woof";
     }
@@ -43,7 +47,6 @@ class Dog extends Animal {
 
 class Cow extends Animal {
 
-    
     public String talk() {
         return "Moo";
     }
@@ -53,12 +56,12 @@ class Cow extends Animal {
 public class Barn {
     /*
     static void makeSound(final Animal a) {
-        System.out.println(a.talk());
+    System.out.println(a.talk());
     }
-    */
+     */
     public static void main (String[] args) {
         Animal b = new Cat();
-        System.out.println(b.talk());
+        System.out.println("Animal with cat properties b:"+  b.talk());
         ArrayList<Cat> barn = new ArrayList<Cat>();
         Animal a = new Animal();
         Cat c = new Cat();
@@ -67,7 +70,7 @@ public class Barn {
         //barn.add(a);
         //barn.add(b);
         barn.add(c);
-        
+
         System.out.println(a.getAge());
         System.out.println(b.getAge());
         System.out.println(c.getAge());
@@ -76,8 +79,7 @@ public class Barn {
         System.out.println(b.getName());
         System.out.println(c.getName());
         
-        
-        
+        System.out.println(c.talk());
         
         
         //ArrayList<Animal> barn = new ArrayList<Animal>();
