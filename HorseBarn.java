@@ -4,6 +4,20 @@ public class HorseBarn
      * that is currently occupying the space. A null value indicates an empty space.
      */
     private Horse[] spaces;
+
+    public HorseBarn (Horse[] newSpaces) {
+        spaces = newSpaces;
+    }
+
+    public void printSpaces() {
+        System.out.print("{");
+        for (Horse a : spaces) {
+            if (a == null) System.out.print("null,");
+            else System.out.print(a.getName() + ",");
+        }
+        System.out.println("}");
+    }
+
     /** Returns the index of the space that contains the horse with the specified name.
      * Precondition: No two horses in the barn have the same name.
      * @param name the name of the horse to find
