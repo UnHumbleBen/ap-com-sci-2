@@ -284,7 +284,7 @@ public class Agario
     public static void main(String[] args) throws InterruptedException {
         JFrame frame = new JFrame();
         frame.setSize(515,500);
-        frame.setTitle("Agario");
+        frame.setTitle("Benjamin Lee");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Micro myAgario = new Micro();
         frame.add(myAgario);
@@ -327,7 +327,7 @@ public class Agario
 
         frame.add(myAgario);
         do {
-            Thread.sleep(50);
+            Thread.sleep(10);
             myAgario.repaint();
             frame.setVisible(true);
         }

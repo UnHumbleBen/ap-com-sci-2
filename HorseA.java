@@ -21,5 +21,9 @@ public class HorseA implements Horse
         return wieght;
     }
     // There may be methods that are not shown.
+    
+    public void test() {
+        
+    }
 
 }

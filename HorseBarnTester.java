@@ -1,14 +1,13 @@
-
 public class HorseBarnTester
 {
     public static void main(String[] args) {
         Horse[] spaces = new Horse[7];
         
-        HorseA Trigger = new HorseA("Trigger", 1340);
-        HorseA Silver = new HorseA("Silver", 1210);
-        HorseA Lady = new HorseA("Lady", 1575);
-        HorseA Patches = new HorseA("Patches", 1350);
-        HorseA Duke = new HorseA("Duke", 1410);
+        Horse Trigger = new HorseA("Trigger", 1340);
+        Horse Silver = new HorseA("Silver", 1210);
+        Horse Lady = new HorseA("Lady", 1575);
+        Horse Patches = new HorseA("Patches", 1350);
+        Horse Duke = new HorseA("Duke", 1410);
         
         spaces[0] = Trigger;
         spaces[2] = Silver;
