@@ -4,7 +4,8 @@ public class BubbleSort
     private int[] array;
     
     /** Constructs a BubbleSort object. 
-     *  Initalizes an array with random numbers from 1 to 100 (non repeating).
+     *  Creates an array of length  size  with random numbers
+     *  from 1 to 100 (non repeating).
      */
     public BubbleSort(int size)
     {
