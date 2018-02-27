@@ -1,5 +1,5 @@
 import java.util.*;
-public class BubbleSort
+public class Sort
 {
     private int[] array;
     
@@ -7,7 +7,7 @@ public class BubbleSort
      *  Creates an array of length  size  with random numbers
      *  from 1 to 100 (non repeating).
      */
-    public BubbleSort(int size)
+    public Sort(int size)
     {
         array = new int[size];
         Random gen = new Random();
@@ -46,8 +46,15 @@ public class BubbleSort
         }
     }
     
+    /** Sorts array
+     *  Uses selection sort.
+     */
+    public void selectionSort() {
+        
+    }
+    
     public static void main(String[] args) {
-        BubbleSort b = new BubbleSort(10);
+        Sort b = new Sort(10);
         b.printArray();
         b.bubbleSort();
         b.printArray();
