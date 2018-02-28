@@ -14,7 +14,6 @@ class Component extends JComponent {
     }
 }
 
-
 public class SortAnimation {
     public static void main(String[] args) {
         JFrame frame = new JFrame();

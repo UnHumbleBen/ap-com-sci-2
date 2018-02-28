@@ -69,12 +69,6 @@ public class Sort
     }
     
     public static void main(String[] args) {
-        System.out.println("Bubble sort");
-        Sort b = new Sort(10);
-        b.printArray();
-        b.bubbleSort();
-        b.printArray();
-        
         System.out.println("Selection sort");
         Sort c = new Sort(10);
         c.printArray();
