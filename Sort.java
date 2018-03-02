@@ -81,6 +81,13 @@ public class Sort
         }
     }
 
+    /** Sorts array
+     *  Uses merge sort.
+     */
+    public void mergeSort() {
+
+    }
+
     /** Prints whether the array is sorted or not */
     public void printIsSorted() {
         for (int i = 0; i < array.length-1; i++) {
@@ -94,7 +101,7 @@ public class Sort
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        while (true) {
+        do  {
             System.out.println("Insertion sort");
             Sort c = new Sort(10);
             c.printArray();
@@ -104,6 +111,6 @@ public class Sort
             c.printIsSorted();
             System.out.println("Press 1 to run again, any other key to stop");
             if (in.nextInt() != 1) break;
-        }
+        } while (true);
     }
 }
