@@ -2,7 +2,7 @@ import java.util.*;
 public class Sort
 {
     private int[] array;
-    
+
     /** Constructs a BubbleSort object. 
      *  Creates an array of length  size  with random numbers
      *  from 1 to 100 (non repeating).
@@ -22,7 +22,7 @@ public class Sort
             array[i] = n;
         }
     }
-    
+
     /** Prints each element in the array. */
     public void printArray() {
         for (int i = 0; i < array.length; i++) {
@@ -30,14 +30,14 @@ public class Sort
         }
         System.out.println();
     }
-    
+
     /** Swaps the elements in the  array  at index  a  and index  b  .*/
     public void swap(int a, int b) {
         int temp = array[a];
         array[a] = array[b];
         array[b] = temp;
     }
-    
+
     /** Sorts array in order from least to greatest
      *  Uses bubble sort.
      */
@@ -50,7 +50,7 @@ public class Sort
             }
         }
     }
-    
+
     /** Sorts array
      *  Uses selection sort.
      */
@@ -67,12 +67,25 @@ public class Sort
             swap(i, minIndex);
         }
     }
-    
+
+    /** Sorts array
+     *  Uses insertion sort.
+     */
+    public void insertionSort() {
+        for (int i = 1; i <= array.length; i++) {
+            int j = i;
+            while (--j > 0) {
+                if (array[j] >= array[j-1]) break;
+                swap(j,j-1);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println("Selection sort");
+        System.out.println("Insertion sort");
         Sort c = new Sort(10);
         c.printArray();
-        c.selectionSort();
+        c.insertionSort();
         c.printArray();
     }
 }
