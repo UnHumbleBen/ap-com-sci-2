@@ -81,11 +81,29 @@ public class Sort
         }
     }
 
+    /** Prints whether the array is sorted or not */
+    public void printIsSorted() {
+        for (int i = 0; i < array.length-1; i++) {
+            if (array[i] > array[i+1]) {
+                System.out.println("Array is not sorted");
+                return;
+            }
+        }
+        System.out.println("Array is sorted");
+    }
+
     public static void main(String[] args) {
-        System.out.println("Insertion sort");
-        Sort c = new Sort(10);
-        c.printArray();
-        c.insertionSort();
-        c.printArray();
+        Scanner in = new Scanner(System.in);
+        while (true) {
+            System.out.println("Insertion sort");
+            Sort c = new Sort(10);
+            c.printArray();
+            c.printIsSorted();
+            c.insertionSort();
+            c.printArray();
+            c.printIsSorted();
+            System.out.println("Press 1 to run again, any other key to stop");
+            if (in.nextInt() != 1) break;
+        }
     }
 }
