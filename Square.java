@@ -10,7 +10,7 @@ public class Square
      */
     public Square(boolean isBlack, int num)
     {
-        black = isBlack;
-        n = num;
+        this.black = isBlack;
+        this.n = num;
     }
 }
