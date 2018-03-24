@@ -1,5 +1,5 @@
 
 public interface NumberGroup
 {
-    boolean contains();
+    boolean contains(int num);
 }

@@ -1,33 +1,24 @@
-
-/**
- * Write a description of class Range here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class Range
+import java.util.List;
+import java.util.ArrayList;
+public class Range implements NumberGroup
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Range
-     */
-    public Range()
+    private List<Integer> group = new ArrayList<>();
+    public Range(int min, int max) 
     {
-        // initialise instance variables
-        x = 0;
+        int n = min;
+        while (n <= max) 
+        {
+            group.add(n);
+            n++;
+        }
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
+    
+    public boolean contains(int num)
     {
-        // put your code here
-        return x + y;
+        for (int n : group)
+        {
+            if (n == num) return true;
+        }
+        return false;
     }
 }
