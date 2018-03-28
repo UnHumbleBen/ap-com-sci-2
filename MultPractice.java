@@ -1,6 +1,6 @@
 public class MultPractice implements StudyPractice
 {
-    private int first;
+    final private int first;
     private int second;
 
     public MultPractice(int num1, int num2) {

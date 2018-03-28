@@ -1,33 +1,19 @@
 
-/**
- * Write a description of class SparseArrayEntry here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class SparseArrayEntry
-{
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class SparseArrayEntry
-     */
-    public SparseArrayEntry()
+public class SparseArrayEntry {
+    private int row;
+    private int col;
+    
+    private int value;
+    
+    public SparseArrayEntry(int r, int c, int v)
     {
-        // initialise instance variables
-        x = 0;
+        row = r;
+        col = c;
+        value = v;
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+    
+    public int getRow() { return row; }
+    public int getCol() { return col; }
+    public int getValue() { return value; }
+    
 }
