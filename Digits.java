@@ -49,4 +49,38 @@ public class Digits
         }
         return true;
     }
+    
+    public int getModeDigit()
+    {
+        int mode = 0;
+        int modeIndex = 0;
+        for (int i = 0; i < digitList.size(); i++)
+        {
+            int digit = digitList.get(i);
+            if (count(digit) > mode)
+            {
+                mode = count(digit);
+                modeIndex = i;
+            }
+        }
+        int modeDigit = digitList.get(modeIndex);
+        for (Integer digit: digitList)
+        {
+            if (count(digit) == mode && digit != modeDigit)
+            {
+                return -1; 
+            }
+        }
+        return modeDigit;
+    }
+
+    public int count(int num)
+    {
+        int count = 0;
+        for (Integer digit: digitList)
+        {
+            if (digit == num) count++; 
+        }
+        return count;
+    }
 }
