@@ -6,24 +6,6 @@ public class Digits
      */
     private ArrayList<Integer> digitList = new ArrayList<>();
 
-    /** Constructs a Digits object that represents num.
-     *  Precondtiion: num >= 0
-     */
-    /*
-    public Digits(int num)
-    {
-    if (num == 0) {
-    digitList.add(0);
-    }
-
-    while (num > 0) {
-    digitList.add(0, num % 10);
-    num /= 10;
-    }
-    }
-     */
-
-    // in class one
     public Digits (int num)
     {
         digitList = new ArrayList<>();
