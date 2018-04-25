@@ -8,6 +8,6 @@ public class SubstringChecker implements Checker
     }
     
     public boolean accept(String text) {
-        return string.indexOf(text) != -1;
+        return text.indexOf(string) != -1;
     }
 }
